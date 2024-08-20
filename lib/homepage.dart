@@ -1,24 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:untitled/result.dart';
 
+enum Gender { none, male, female }
+
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isMale = false;
+  Gender gender = Gender.none;
   double sliderValue = 50.0;
   int weightValue = 20;
   int ageValue = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0A0E21),
+      backgroundColor: const Color(0xff0A0E21),
       appBar: AppBar(
-        backgroundColor: Color(0xff1A1F38),
+        backgroundColor: const Color(0xff1A1F38),
         centerTitle: true,
         title: const Text(
           "BMI Calculator",
@@ -36,14 +40,17 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
+                      focusColor: Colors.white,
+                      highlightColor: Colors.amber,
                       child: Container(
                         decoration: BoxDecoration(
-                            color:
-                                isMale ? Color(0xff1A1F38) : Color(0xfff10606),
+                            color: gender == Gender.female
+                                ? const Color(0xfff10606)
+                                : const Color(0xff1A1F38),
                             borderRadius: BorderRadius.circular(15)),
                         width: MediaQuery.of(context).size.width * .3,
                         height: 150,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -63,24 +70,25 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onTap: () {
                         setState(() {
-                          isMale = false;
+                          gender = Gender.female;
                         });
                       },
                     ),
                     InkWell(
                       onTap: () {
                         setState(() {
-                          isMale = true;
+                          gender = Gender.male;
                         });
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color:
-                                isMale ? Color(0xfff10606) : Color(0xff1A1F38),
+                            color: gender == Gender.male
+                                ? const Color(0xfff10606)
+                                : const Color(0xff1A1F38),
                             borderRadius: BorderRadius.circular(15)),
                         width: MediaQuery.of(context).size.width * .3,
                         height: 150,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -110,12 +118,12 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(30.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Color(0xff1A1F38),
+                    color: const Color(0xff1A1F38),
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
@@ -138,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       "${sliderValue.round()}",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                           color: Colors.white),
@@ -168,14 +176,14 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: Color(0xff1A1F38),
+                          color: const Color(0xff1A1F38),
                           borderRadius: BorderRadius.circular(15)),
                       width: MediaQuery.of(context).size.width * .3,
                       height: 150,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Weight",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -184,12 +192,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             "$weightValue",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 24,
                                 color: Colors.white),
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               CircleAvatar(
@@ -209,14 +217,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Color(0xff1A1F38),
+                          color: const Color(0xff1A1F38),
                           borderRadius: BorderRadius.circular(15)),
                       width: MediaQuery.of(context).size.width * .3,
                       height: 150,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Age",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -225,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             "$ageValue",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 24,
                                 color: Colors.white),
@@ -241,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                                     });
                                   }
                                 },
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   radius: 18,
                                   backgroundColor: Colors.white,
                                   child: Icon(Icons.remove),
@@ -253,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                                     ageValue++;
                                   });
                                 },
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   radius: 18,
                                   backgroundColor: Colors.white,
                                   child: Icon(Icons.add),
@@ -283,8 +291,8 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               width: double.infinity,
               height: 80,
-              decoration: BoxDecoration(color: Color(0xfff10606)),
-              child: Row(
+              decoration: const BoxDecoration(color: Color(0xfff10606)),
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
